@@ -8,25 +8,20 @@ namespace AOC2022
 
 	class Day02
 	{
-		// Input filename
-		static string INPUT_FILENAME = "Day02.input.txt";
-
 		// Points for drawing or winning a round
 		static int DRAW_POINTS = 3;
 		static int WIN_POINTS = 6;
 
-
-		static List<(char, char)> ReadInput()
+		class Day02Input
 		{
-			List<InputType> output = new List<InputType>();
+			public char entry1;
+			public char entry2;
 
-			var lines = Util.ReadInputFileLines(INPUT_FILENAME);
-			foreach (string line in lines)
+			public Day02Input(string line)
 			{
-				output.Add((line[0], line[2]));
+				entry1 = line[0];
+				entry2 = line[2];
 			}
-
-			return output;
 		}
 
 		static bool IsWinner(char myChoice, char theirChoice)
@@ -41,7 +36,6 @@ namespace AOC2022
 		{
 			// Conversion factor for converting from 'their' choice to 'my' choice
 			const int CONVERSION_FACTOR = 'X' - 'A';
-
 
 			int points = 0;
 
@@ -98,13 +92,14 @@ namespace AOC2022
 
 		public static void Run()
 		{
-			List<InputType> input = ReadInput();
+			const string INPUT_FILENAME = "Day02.input.txt";
+			List<Day02Input> input = Util.ReadInputFile<Day02Input>(INPUT_FILENAME);
 
-			int totalPointsA = input.Select(x => CalculatePointsA(x.Item2, x.Item1)).Sum();
-			Console.WriteLine($"Part 1: {totalPointsA}"); // 13682
+			int part1Answer = input.Select(x => CalculatePointsA(x.entry2, x.entry1)).Sum();
+			Console.WriteLine($"Part 1: {part1Answer}"); // 13682
 
-			int totalPointsB = input.Select(x => CalculatePointsB(x.Item1, x.Item2)).Sum();
-			Console.WriteLine($"Part 1: {totalPointsB}"); // 12881
+			int part2Answer = input.Select(x => CalculatePointsB(x.entry1, x.entry2)).Sum();
+			Console.WriteLine($"Part 2: {part2Answer}"); // 12881
 		}
 	}
 }

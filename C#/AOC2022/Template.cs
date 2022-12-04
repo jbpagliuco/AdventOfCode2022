@@ -13,11 +13,9 @@ namespace AOC2022
 
 	class DayXX
 	{
-		// Input filename
-		static string INPUT_FILENAME = "DayXX.input.txt";
-
 		public static void Run()
 		{
+			const string INPUT_FILENAME = "DayXX.input.txt";
 			List<DayXXInput> input = Util.ReadInputFile<DayXXInput>(INPUT_FILENAME);
 
 			int part1Answer = 0;

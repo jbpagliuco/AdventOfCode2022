@@ -52,18 +52,16 @@ namespace AOC2022
 
 	class Day04
 	{
-		// Input filename
-		static string INPUT_FILENAME = "Day04.input.txt";
-
 		public static void Run()
 		{
+			const string INPUT_FILENAME = "Day04.input.txt";
 			List<Day04Input> input = Util.ReadInputFile<Day04Input>(INPUT_FILENAME);
 
-			int totalContainedSections = input.Select(x => x.IsOneSectionFullyContained() ? 1 : 0).Sum();
-			Console.WriteLine($"Part 1: {totalContainedSections}"); // 573
+			int part1Answer = input.Select(x => x.IsOneSectionFullyContained() ? 1 : 0).Sum();
+			Console.WriteLine($"Part 1: {part1Answer}"); // 573
 
-			int totalOverlappedSections = input.Select(x => x.DoSectionsOverlap() ? 1 : 0).Sum();
-			Console.WriteLine($"Part 2: {totalOverlappedSections}"); // 867
+			int part2Answer = input.Select(x => x.DoSectionsOverlap() ? 1 : 0).Sum();
+			Console.WriteLine($"Part 2: {part2Answer}"); // 867
 		}
 	}
 }

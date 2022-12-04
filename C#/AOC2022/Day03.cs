@@ -4,17 +4,15 @@ using System.Linq;
 
 namespace AOC2022
 {
-	using InputType = Day03InputType;
-
-	struct Day03InputType
+	class Day03Input
 	{
 		public string bag;
 		public string compartment1;
 		public string compartment2;
 
-		public Day03InputType(string items)
+		public Day03Input(string line)
 		{
-			bag = items;
+			bag = line;
 
 			int compartmentSize = bag.Length / 2;
 			compartment1 = bag.Substring(0, compartmentSize);
@@ -40,25 +38,6 @@ namespace AOC2022
 
 	class Day03
 	{
-		// Input filename
-		static string INPUT_FILENAME = "Day03.input.txt";
-
-
-		// Read input file
-		static List<InputType> ReadInput()
-		{
-			List<InputType> output = new List<InputType>();
-
-			var lines = Util.ReadInputFileLines(INPUT_FILENAME);
-			foreach (string line in lines)
-			{
-				InputType bag = new InputType(line);
-				output.Add(bag);
-			}
-
-			return output;
-		}
-
 		static int GetItemPriority(char item)
 		{
 			if (item >= 'a' && item <= 'z')
@@ -73,7 +52,7 @@ namespace AOC2022
 			throw new Exception("Unreachable");
 		}
 
-		static char FindDuplicateItem(InputType bag1, InputType bag2, InputType bag3)
+		static char FindDuplicateItem(Day03Input bag1, Day03Input bag2, Day03Input bag3)
 		{
 			foreach (char item1 in bag1.bag)
 			{
@@ -95,22 +74,23 @@ namespace AOC2022
 
 		public static void Run()
 		{
-			List<InputType> input = ReadInput();
+			const string INPUT_FILENAME = "Day03.input.txt";
+			List<Day03Input> input = Util.ReadInputFile<Day03Input>(INPUT_FILENAME);
 
-			int totalPriority1 = input.Select(x => GetItemPriority(x.GetDuplicateItem())).Sum();
-			Console.WriteLine($"Part 1: {totalPriority1}"); // 8185
+			int part1Answer = input.Select(x => GetItemPriority(x.GetDuplicateItem())).Sum();
+			Console.WriteLine($"Part 1: {part1Answer}"); // 8185
 
-			int totalPriority2 = 0;
+			int part2Answer = 0;
 			for (int i = 0; i < input.Count; i += 3)
 			{
-				InputType bag1 = input[i];
-				InputType bag2 = input[i + 1];
-				InputType bag3 = input[i + 2];
+				Day03Input bag1 = input[i];
+				Day03Input bag2 = input[i + 1];
+				Day03Input bag3 = input[i + 2];
 
 				char duplicateItem = FindDuplicateItem(bag1, bag2, bag3);
-				totalPriority2 += GetItemPriority(duplicateItem);
+				part2Answer += GetItemPriority(duplicateItem);
 			}
-			Console.WriteLine($"Part 2: {totalPriority2}"); // 2817
+			Console.WriteLine($"Part 2: {part2Answer}"); // 2817
 		}
 	}
 }
