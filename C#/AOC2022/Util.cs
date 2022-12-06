@@ -16,11 +16,31 @@ namespace AOC2022
 		{
 			List<InputType> output = new List<InputType>();
 
-			var lines = Util.ReadInputFileLines(filename);
+			var lines = ReadInputFileLines(filename);
 			foreach (string line in lines)
 			{
 				InputType input = System.Activator.CreateInstance(typeof(InputType), new object[] { line }) as InputType;
 				output.Add(input);
+			}
+
+			return output;
+		}
+
+		public static List<List<string>> ReadInputFileSplit(string filename, string delim)
+		{
+			List<List<string>> output = new List<List<string>>();
+			output.Add(new List<string>());
+
+			List<string> inputLines = ReadInputFileLines(filename);
+			foreach (string line in inputLines)
+			{
+				if (line == delim)
+				{
+					output.Add(new List<string>());
+					continue;
+				}
+
+				output.Last().Add(line);
 			}
 
 			return output;
