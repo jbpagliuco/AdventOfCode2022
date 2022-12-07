@@ -5,6 +5,12 @@ namespace AOC2022
 {
 	class Util
 	{
+		// Read a file
+		public static string ReadInputFile(string filename)
+		{
+			return System.IO.File.ReadAllText($"{System.AppContext.BaseDirectory}\\..\\..\\..\\..\\..\\{filename}");
+		}
+
 		// Read a file line by line
 		public static List<string> ReadInputFileLines(string filename)
 		{
