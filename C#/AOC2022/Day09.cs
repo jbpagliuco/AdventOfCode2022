@@ -34,14 +34,6 @@ namespace AOC2022
 			return new ValueTuple<int, int>(x, y);
 		}
 
-		public bool IsNextTo(Day09Position other)
-		{
-			int dX = other.x - x;
-			int dY = other.y - y;
-
-			return Math.Abs(dX) <= 1 && Math.Abs(dY) <= 1;
-		}
-
 		public void Move(Day09Direction direction)
 		{
 			switch (direction)
